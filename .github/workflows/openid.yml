@@ -30,5 +30,4 @@ jobs:
 
       # Runs a single command to list all the buckets
     - name: List all S3 buckets
-      run: |
-        aws s3 ls --region us-east-1
+      run: aws s3 ls --region us-east-1
