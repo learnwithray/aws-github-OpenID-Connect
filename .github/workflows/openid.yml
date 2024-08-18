@@ -23,6 +23,11 @@ jobs:
         role-to-assume: ${{ secrets.AWS_DEV_GITHUB_ACTION_ROLE }}
         aws-region: ${{ secrets.AWS_REGION }}
 
+    - name: Debug AWS credentials
+      run: |
+         aws sts get-caller-identity
+
+
       # Runs a single command to list all the buckets
     - name: List all S3 buckets
       run: |
