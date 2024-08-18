@@ -27,3 +27,5 @@ jobs:
     - name: List all S3 buckets
       run: |
         aws s3 ls
+      env:
+        AWS_DEFAULT_REGION: us-east-1
