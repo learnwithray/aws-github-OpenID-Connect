@@ -23,7 +23,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::190836357141:role/GitHubActionsOIDCRole_1
-          role-session-name: samplerolesession
+          # role-session-name: samplerolesession
           aws-region: us-east-1
       - name: Print Assumed Role
         run: aws sts get-caller-identity
