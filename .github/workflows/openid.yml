@@ -1,3 +1,54 @@
+# This is a basic workflow to help you get started with Actions
+
+name: OpenId
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  OpenId-Connector:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials using OIDC
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::190836357141:role/GitHubActionsOIDCRole_1
+        aws-region: ${{ secrets.AWS_REGION }}
+        # role-to-assume: ${{ secrets.AWS_DEV_GITHUB_ACTION_ROLE }}
+        # aws-region: ${{ secrets.AWS_REGION }}
+    - name: Debug AWS credentials
+      run: |
+         aws sts get-caller-identity
+
+
+    #   # Runs a single command to list all the buckets
+    # - name: List all S3 buckets
+    #   run: aws s3 ls --region us-east-1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # name: AWS OIDC GITHUB
 # on:
 #   push:
@@ -35,41 +86,3 @@
 
 
 
-
-# This is a basic workflow to help you get started with Actions
-
-name: OpenId
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-  OpenId-Connector:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Configure AWS credentials using OIDC
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: arn:aws:iam::190836357141:role/GitHubActionsOIDCRole_1
-        aws-region: ${{ secrets.AWS_REGION }}
-        # role-to-assume: ${{ secrets.AWS_DEV_GITHUB_ACTION_ROLE }}
-        # aws-region: ${{ secrets.AWS_REGION }}
-    - name: Debug AWS credentials
-      run: |
-         aws sts get-caller-identity
-
-
-      # Runs a single command to list all the buckets
-    - name: List all S3 buckets
-      run: aws s3 ls --region us-east-1
